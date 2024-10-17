@@ -21,7 +21,7 @@ jobs:
           glib 
           automake
           imagemagick
-          dockbook
+          docbook
           
           sudo ln -s $(which glibtoolize) /usr/local/bin/libtoolize
           
