@@ -59,15 +59,10 @@ jobs:
       - name: Installing requirements
         run: >
           NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-          sudo rm -f /usr/local/bin/idle3
           
           brew install --force --overwrite 
-          python@3.12 
-          pkg-config 
-          glib
+          python@3.13 
           make 
-          libtool 
           automake
           imagemagick
           docbook-xsl
