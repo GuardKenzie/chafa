@@ -40,6 +40,13 @@ jobs:
           
           make
 
+      - name: Check
+        working-directory: ./build/tools/chafa
+        run: >
+          rm ./*.o
+          ./chafa --version
+        
+
       - uses: actions/upload-artifact@v4
         with:
           name: macos_arm
