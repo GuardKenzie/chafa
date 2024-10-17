@@ -23,7 +23,9 @@ jobs:
           imagemagick
           docbook
 
-          export XML_CATALOG_FILES="/opt/homebrew/etc/xml/catalog"
+          sudo mkdir /etc/xml
+          
+          sudo ln -s /opt/homebrew/etc/xml/catalog /etc/xml/catalog
           
           sudo ln -s $(which glibtoolize) /usr/local/bin/libtoolize
           
