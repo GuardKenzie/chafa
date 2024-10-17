@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Running prerequisites
+      - name: Installing requirements
         run: >
           brew install 
           make 
@@ -23,6 +23,8 @@ jobs:
           imagemagick
           docbook-xsl
 
+      - name: Running prerequisites
+        run: >
           sudo mkdir /etc/xml
           
           sudo ln -s /opt/homebrew/etc/xml/catalog /etc/xml/catalog
@@ -41,6 +43,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: macos_arm
-          path: chafa
+          path: build
         
       
