@@ -1,4 +1,4 @@
-name: macOS ARM build
+name: macOS builds
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  arm:
+    name: ARM build
     runs-on: macos-14
 
     steps:
@@ -41,14 +42,60 @@ jobs:
       - name: Check
         working-directory: ./build/tools/chafa
         run: >
-          rm ./*.o
-          
           ./chafa --version
         
 
       - uses: actions/upload-artifact@v4
         with:
           name: macos_arm
+          path: build/tools/chafa/chafa
+          
+  x86:
+    name: x86 build
+    runs-on: macos-13
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing requirements
+        run: >
+          NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          
+          brew install --force --overwrite 
+          python@3.12 
+          pkg-config 
+          glib
+          make 
+          libtool 
+          automake
+          imagemagick
+          docbook-xsl
+
+      - name: Running prerequisites
+        run: >
+          sudo mkdir /etc/xml
+          
+          sudo ln -s /opt/homebrew/etc/xml/catalog /etc/xml/catalog
+          
+          sudo ln -s $(which glibtoolize) /usr/local/bin/libtoolize
+          
+          mkdir build
+
+      - name: Building
+        working-directory: ./build
+        run: >
+          ../autogen.sh --enable-man
+          
+          gmake
+
+      - name: Check
+        working-directory: ./build/tools/chafa
+        run: >
+          ./chafa --version
+        
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos_x86
           path: build/tools/chafa/chafa
         
       
