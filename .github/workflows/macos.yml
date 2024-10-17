@@ -32,8 +32,8 @@ jobs:
           ./autogen.sh --enable-man
           make
 
-      - name: Upload artifact
       - uses: action/upload-artifact@v4
+      - name: Upload artifact
         with:
           name: macos_arm
           path: chafa
