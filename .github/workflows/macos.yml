@@ -17,8 +17,6 @@ jobs:
           brew install 
           make 
           libtool 
-          pkg-config 
-          glib 
           automake
           imagemagick
           docbook-xsl
@@ -51,6 +49,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: macos_arm
-          path: build
+          path: build/tools/chafa/chafa
         
       
