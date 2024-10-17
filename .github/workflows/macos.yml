@@ -21,7 +21,7 @@ jobs:
           glib 
           automake
           imagemagick
-          docbook
+          docbook-xsl
 
           sudo mkdir /etc/xml
           
