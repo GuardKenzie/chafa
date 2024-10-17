@@ -22,6 +22,8 @@ jobs:
           automake
           imagemagick
           docbook
+
+          export XML_CATALOG_FILES="/opt/homebrew/etc/xml/catalog"
           
           sudo ln -s $(which glibtoolize) /usr/local/bin/libtoolize
           
