@@ -33,7 +33,6 @@ jobs:
           make
 
       - uses: action/upload-artifact@v4
-      - name: Upload artifact
         with:
           name: macos_arm
           path: chafa
