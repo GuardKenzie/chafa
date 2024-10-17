@@ -1,0 +1,41 @@
+name: macOS ARM build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running prerequisites
+        run: >
+          brew install 
+          make 
+          libtool 
+          pkg-config 
+          glib 
+          automake
+          imagemagick
+          
+          sudo ln -s $(which glibtoolize) /usr/local/bin/libtoolize
+          
+          mkdir build
+
+      - name: Building
+        working-directory: ./build
+        run: >
+          ./autogen.sh --enable-man
+          make
+
+      - name: Upload artifact
+      - uses: action/upload-artifact@v4
+        with:
+          name: macos_arm
+          path: chafa
+        
+      
